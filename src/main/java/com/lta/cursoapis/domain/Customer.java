@@ -1,51 +1,17 @@
 package com.lta.cursoapis.domain;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Customer {
-    private int ID;
+
+    private int id;
     private String name;
     private String username;
     private String password;
 
-    public Customer() {
-    }
-
-    public Customer(int ID, String name, String username, String password) {
-        this.ID = ID;
-        this.name = name;
-        this.username = username;
-        this.password = password;
-    }
-
-    public int getID() {
-
-        return ID;
-    }
-
-    public void setID(int ID) {
-        this.ID = ID;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
 }
