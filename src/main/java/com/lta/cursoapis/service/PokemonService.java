@@ -5,6 +5,7 @@ import com.lta.cursoapis.repository.PokemonRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PokemonService {
@@ -19,20 +20,23 @@ public class PokemonService {
         return repository.findAll();
     }
 
+    public Optional<Pokemon> findById(Integer id) {
+        return repository.findById(id);
+    }
+
     public Pokemon create(Pokemon pokemon) {
         return repository.save(pokemon);
     }
 
-    public Pokemon update(Integer id, Pokemon pokemon) {
-        Pokemon existing = repository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Pokemon no encontrado"));
+    public Optional<Pokemon> update(Integer id, Pokemon pokemon) {
 
-        existing.setAtaque(pokemon.getAtaque());
-        existing.setDefensa(pokemon.getDefensa());
-        existing.setNombre(pokemon.getNombre());
-        existing.setTipo(pokemon.getTipo());
-
-        return repository.save(existing);
+        return repository.findById(id).map(existing -> {
+            existing.setAtaque(pokemon.getAtaque());
+            existing.setDefensa(pokemon.getDefensa());
+            existing.setNombre(pokemon.getNombre());
+            existing.setTipo(pokemon.getTipo());
+            return repository.save(existing);
+        });
     }
 
     public void delete(Integer id) {
@@ -41,4 +45,6 @@ public class PokemonService {
         }
         repository.deleteById(id);
     }
+
+
 }

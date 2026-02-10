@@ -22,6 +22,13 @@ public class PokemonController {
         return ResponseEntity.ok(service.findAll());
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Pokemon> getById(@PathVariable Integer id) {
+        return service.findById(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
     @PostMapping
     public ResponseEntity<Pokemon> createPokemon(@RequestBody Pokemon pokemon) {
         Pokemon created = service.create(pokemon);
@@ -33,8 +40,9 @@ public class PokemonController {
             @PathVariable Integer id,
             @RequestBody Pokemon pokemon) {
 
-        Pokemon updated = service.update(id, pokemon);
-        return ResponseEntity.ok(updated);
+        return service.update(id, pokemon)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 
     @DeleteMapping("/{id}")
