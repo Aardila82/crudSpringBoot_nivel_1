@@ -1,7 +1,9 @@
 package com.lta.cursoapis.controllers;
 
 import com.lta.cursoapis.domain.Product;
+import com.lta.cursoapis.service.ProductService;
 import com.lta.cursoapis.service.ProductsServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,7 +15,10 @@ import java.util.List;
 @RequestMapping("/productos")
 public class ProductController {
 
-    ProductsServiceImpl productsService = new ProductsServiceImpl();
+    //Instancia de clase
+    //ProductService productsService = new ProductsServiceImpl();
+    @Autowired
+    private ProductService productsService;
 
     @GetMapping
     public ResponseEntity<?> getProducts(){
